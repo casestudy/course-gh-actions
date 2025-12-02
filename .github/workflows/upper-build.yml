@@ -10,7 +10,7 @@ on:
 jobs:
     build:
         name: build-upper-app
-        runs-on: macos-latest
+        runs-on: self-hosted
         steps:
             -   run: pwd && ls -al
             -   uses: actions/checkout@v4
