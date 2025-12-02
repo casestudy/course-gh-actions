@@ -1,0 +1,15 @@
+name: upper-build
+
+on:
+    push:
+        paths:
+            -   ".github/workflows/upper-build.yml"
+            -   'upper/**'
+    workflow_dispatch: # manual trigger
+
+jobs:
+    build:
+        name: build-upper-app
+        runs-on: ubuntu-latest
+        steps: 
+            - run: go version
