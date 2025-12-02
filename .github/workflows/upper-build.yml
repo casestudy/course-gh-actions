@@ -19,11 +19,11 @@ jobs:
             -   uses: actions/setup-go@v5
                 with:
                     go-version: '1.22'
-            - run: go version
-            - run: |
-                ls
-                go build
-                ls
-                go test
-                ./upper foo the bar
-            working-directory: ./upper
+            -   run: go version
+            -   run: |
+                    ls
+                    go build
+                    ls
+                    go test
+                    ./upper foo the bar
+                working-directory: ./upper
