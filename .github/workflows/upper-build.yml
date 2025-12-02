@@ -10,7 +10,7 @@ on:
 jobs:
     build:
         name: build-upper-app
-        runs-on: ubuntu-latest
+        runs-on: macos-latest
         steps:
             -   run: pwd && ls -al
             -   uses: actions/checkout@v4
