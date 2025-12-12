@@ -18,9 +18,9 @@ jobs:
                 
             -   name: Run Gemini CLI
                 uses: google-github-actions/run-gemini-cli@v0.1.16
-                with:
+                env:
                     github_token: ${{ secrets.GITHUB_TOKEN }}
+                with:
                     gemini_api_key: ${{ secrets.GEMINI_API_KEY }}
-                    command: "chat"
                     prompt: "You are a helpful assistant. The user said: ${{ github.event.comment.body }}"
 
