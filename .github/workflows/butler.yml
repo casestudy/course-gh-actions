@@ -6,6 +6,8 @@ on:
 
 permissions:
     pull-requests: write
+    issues: write
+    contents: read
 
 jobs:
     chat: # The job name
