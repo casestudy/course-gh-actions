@@ -15,6 +15,6 @@ jobs:
                 with:
                     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
                     GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
-                    command: chat
+                    command: "chat"
                     prompt: "You are a helpful assistant. The user said: ${{ github.event.comment.body }}"
 
