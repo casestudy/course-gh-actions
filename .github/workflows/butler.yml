@@ -15,6 +15,6 @@ jobs:
                 with:
                     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
                     GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
-                    cmd: chat
+                    command: chat
                     comment_body: ${{ github.event.comment.body }} # This extracts the content of the comment that was made
 
