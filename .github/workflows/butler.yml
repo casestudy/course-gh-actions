@@ -26,6 +26,6 @@ jobs:
                   prompt: "You are a helpful assistant. The user said: ${{ github.event.comment.body }}"
 
             - name: Show Gemini output
-              run: echo "Hello ${{ steps.gemini.summary }}"
+              run: echo "Hello ${{ steps.gemini.error }}"
                     
 
