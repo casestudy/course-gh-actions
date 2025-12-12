@@ -13,6 +13,9 @@ jobs:
     chat: # The job name
         runs-on: ubuntu-latest
         steps:
+            -   name: Checkout repo
+                uses: actions/checkout@v4
+                
             -   name: Run Gemini CLI
                 uses: google-github-actions/run-gemini-cli@v0.1.16
                 with:
