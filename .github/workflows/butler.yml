@@ -23,7 +23,7 @@ jobs:
                   github_token: ${{ secrets.GITHUB_TOKEN }}
               with:
                   gemini_api_key: ${{ secrets.GEMINI_API_KEY }}
-                  prompt: "/gemini-cli You are a helpful assistant. The user said: ${{ github.event.comment.body }}"
+                  prompt: "@gemini-cli You are a helpful assistant. The user said: ${{ github.event.comment.body }}"
 
             - name: Show Gemini output
               run: echo "Hello ${{ steps.gemini.error }}"
