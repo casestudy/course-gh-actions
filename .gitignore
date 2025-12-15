@@ -66,3 +66,8 @@ go.work
 
 # End of https://www.toptal.com/developers/gitignore/api/go
 
+# gemini-cli settings
+.gemini/
+
+# GitHub App credentials
+gha-creds-*.json

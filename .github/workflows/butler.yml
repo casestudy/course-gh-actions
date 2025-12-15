@@ -13,19 +13,13 @@ jobs:
     chat:
         runs-on: ubuntu-latest
         steps:
-            - name: Checkout repo
-              uses: actions/checkout@v4
-
-            - name: Run Gemini CLI
-              id: gemini
-              uses: google-github-actions/run-gemini-cli@v0.1.16
-              env:
-                  github_token: ${{ secrets.GITHUB_TOKEN }}
+            - name: Run OpenAI API
+              id: openai
+              uses: ca-dp/code-butler@v1
               with:
-                  gemini_api_key: ${{ secrets.GEMINI_API_KEY }}
-                  prompt: "@gemini-cli You are a helpful assistant. The user said: ${{ github.event.comment.body }}"
-
-            - name: Show Gemini output
-              run: echo "Hello ${{ steps.gemini.error }}"
+                  OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+                  cmd: chat
+                  comment_body: ${{ github.event.comment.body }}
                     
 
