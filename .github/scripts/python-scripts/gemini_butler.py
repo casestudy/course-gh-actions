@@ -1,6 +1,6 @@
 import os
 import requests
-import google.genai as genai
+from google.genai import types
 
 def main():
     # 1. Setup Configuration
@@ -9,8 +9,8 @@ def main():
     raw_comment = os.environ["COMMENT_BODY"]
     
     # 2. Configure Gemini
-    genai.configure(api_key=gemini_key)
-    model = genai.GenerativeModel('gemini-1.5-flash')
+    types.configure(api_key=gemini_key)
+    model = types.GenerativeModel('gemini-1.5-flash')
 
     # 3. Prepare the Prompt
     # Remove the trigger phrase '/ask' to get the actual question
