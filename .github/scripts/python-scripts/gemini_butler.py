@@ -29,7 +29,7 @@ def main():
 
     try:
         response = client.models.generate_content(
-            model='gemini-1.5-flash', 
+            model='gemini-2.5-flash', 
             contents=f"You are a helpful coding assistant. The user said: {user_question}"
         )
         reply_text = response.text
