@@ -7,6 +7,8 @@ def main():
     github_token = os.environ["GITHUB_TOKEN"]
     gemini_key = os.environ["GEMINI_API_KEY"]
     raw_comment = os.environ["COMMENT_BODY"]
+    repo = os.environ["REPO"]
+    comment_id = os.environ["COMMENT_ID"]
     
     # 2. Configure Gemini
     client = genai.Client(api_key=gemini_key)

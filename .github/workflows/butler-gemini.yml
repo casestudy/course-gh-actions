@@ -31,6 +31,8 @@ jobs:
                 env:
                     GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
                     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+                    REPO: ${{ github.repository }}
+                    COMMENT_ID: ${{ github.event.comment.id }}
                     COMMENT_BODY: ${{ github.event.comment.body }}
                 run: |
                     python .github/scripts/python-scripts/gemini_butler.py
