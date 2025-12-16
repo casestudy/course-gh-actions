@@ -56,6 +56,8 @@ app.MapGet("/weatherforecast", () =>
 
 var get_version = () => typeof(WeatherForecast).Assembly.GetCustomAttribute<AssemblyInformationalVersionAttribute>()?.InformationalVersion;
 
+var password = "master";
+
 app.MapGet("/healthz", () =>
 {
     return $"Healthy\n{get_version()}";
