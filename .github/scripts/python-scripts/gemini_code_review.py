@@ -66,7 +66,7 @@ def main():
     # 2. Prompt for JSON Output
     prompt = (
         "You are a strict Senior Software Engineer Code Reviewer. Review this git diff. "
-        "Your goal is to identify **ALL** bugs, security vulnerabilities, logic errors, and code style violations.\n\n"
+        "Your goal is to identify **ALL** bugs, security vulnerabilities, logic errors, unused variables or dead code, and code style violations.\n\n"
         
         "IMPORTANT INSTRUCTIONS:\n"
         "1. **Be Exhaustive:** Do not stop after finding one error. Scan the entire diff from top to bottom.\n"
@@ -101,13 +101,37 @@ def main():
         summary = data.get("summary", "Code Review")
         inline_comments = data.get("comments", [])
 
+        # If Gemini generates multiple comments for the same file/line, we merge them.
+        merged_map = {} # Key: (path, line) -> Comment Dict
+        
+        for item in inline_comments:
+            path = item.get('path')
+            line = item.get('line')
+            body = item.get('body')
+            
+            if not path or not line or not body:
+                continue
+
+            key = (path, line)
+            
+            if key in merged_map:
+                # If a comment already exists for this line, append the new body
+                existing_body = merged_map[key]['body']
+                merged_map[key]['body'] = f"{existing_body}\n\n---\n\n{body}"
+            else:
+                # Otherwise, start a new entry
+                merged_map[key] = item
+
+        # Convert the dictionary back to a list
+        final_comments = list(merged_map.values())
+
     except Exception as e:
         print(f"Gemini processing error: {e}")
         summary = f"Error parsing Gemini response: {e}"
-        inline_comments = []
+        final_comments = []
 
     # 4. Submit to GitHub
-    post_review(repo, pr_issue_number, github_token, inline_comments, summary)
+    post_review(repo, pr_issue_number, github_token, final_comments, summary)
 
 if __name__ == "__main__":
     main()
