@@ -33,10 +33,12 @@ def main():
         )
         reply_text = response.text
 
+        print(f"Gemini Reply: {reply_text}")
+
         # 5. Post Reply to GitHub
         headers = {
             "Authorization": f"Bearer {github_token}",
-            "Accept": "application/vnd.github.v3+json"
+            "Accept": "application/vnd.github+json"
         }
         
         # We reply to the specific comment ID to keep it threaded
