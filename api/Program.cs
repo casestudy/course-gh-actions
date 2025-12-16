@@ -13,9 +13,9 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-var newSummaries = new[]
+var newsummaries = new[]
 {
-    "Brrrrr", "Yikes", "Frozen", "Hot", "Ouch", "StopIt"
+    "Freezing", "Chilly", "Cool", "Warm", "Balmy", "Hot", "Scorching"
 };
 
 var summaries = new[]
@@ -55,6 +55,8 @@ app.MapGet("/weatherforecast", () =>
 .WithOpenApi();
 
 var get_version = () => typeof(WeatherForecast).Assembly.GetCustomAttribute<AssemblyInformationalVersionAttribute>()?.InformationalVersion;
+
+var password = "master";
 
 app.MapGet("/healthz", () =>
 {
