@@ -93,7 +93,7 @@ def main():
         # For general conversation, we post to the ISSUE endpoint, not the comment endpoint.
         url = f"https://api.github.com/repos/{repo}/issues/{pr_issue_number}/comments"
         payload = {
-            "body": f"> {user_question}\n\n**Gemini Code Review:**\n{reply_text}"
+            "body": f"**Gemini Code Review:**\n{reply_text}"
         }
     elif event_name == "pull_request_review_comment":
         # For code review, we reply to the specific thread.
