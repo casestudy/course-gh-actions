@@ -65,21 +65,24 @@ def main():
 
     # 2. Prompt for JSON Output
     prompt = (
-        "You are a Senior Software Engineer. Review this git diff. "
-        "Identify bugs, security issues, and bad practices. "
-        "IMPORTANT: You must respond in valid JSON format only.\n\n"
+        "You are a strict Senior Software Engineer Code Reviewer. Review this git diff. "
+        "Your goal is to identify **ALL** bugs, security vulnerabilities, logic errors, and code style violations.\n\n"
+        
+        "IMPORTANT INSTRUCTIONS:\n"
+        "1. **Be Exhaustive:** Do not stop after finding one error. Scan the entire diff from top to bottom.\n"
+        "2. **Multiple Comments:** If there are 5 different bugs, output 5 different inline comments.\n"
+        "3. **Strict JSON:** You must respond in valid JSON format only.\n"
+        "4. **Line Numbers:** 'line' must be the exact line number in the new code (lines starting with +).\n\n"
+
         "Output Structure:\n"
         "{\n"
-        "  \"summary\": \"A brief markdown summary of the overall code quality.\",\n"
+        "  \"summary\": \"High-level summary of the changes.\",\n"
+        "  \"action\": \"APPROVE | REQUEST_CHANGES | COMMENT\",\n"
         "  \"comments\": [\n"
-        "    {\"path\": \"filename.py\", \"line\": 10, \"body\": \"Comment about this line\"}\n"
+        "    {\"path\": \"filename.py\", \"line\": 10, \"body\": \"Fix this variable name.\"},\n"
+        "    {\"path\": \"filename.py\", \"line\": 45, \"body\": \"Potential SQL injection here.\"}\n"
         "  ]\n"
         "}\n\n"
-        "Rules:\n"
-        "1. 'line' must be an integer. It must be a line number that exists in the CHANGED part of the file (added lines).\n"
-        "2. Do not comment on unchanged code.\n"
-        "3. If you are unsure of the line number, put the comment in the 'summary' instead.\n"
-        "\n"
         f"DIFF:\n{diff_text}"
     )
 
@@ -89,7 +92,8 @@ def main():
             model='gemini-2.5-flash', # <--- UPDATED MODEL NAME
             contents=prompt,
             config=types.GenerateContentConfig(
-                response_mime_type="application/json"
+                response_mime_type="application/json",
+                max_output_tokens=4000  # Ensure enough space for long lists
             )
         )
         
