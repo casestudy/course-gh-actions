@@ -1,0 +1,36 @@
+name: Gemini Butler 
+
+on:
+    issue_comment:
+        types: [created]
+
+permissions:
+    pull-requests: write
+    issues: write
+    contents: read
+
+jobs:
+    gemini-chat:
+        if: startsWith(github.event.comment.body, '/ask')
+        runs-on: ubuntu-latest
+
+        steps:
+            -   name: Checkout repo
+                uses: actions/checkout@v4
+
+            -   name: Setup Python
+                uses: actions/setup-python@v4
+                with:
+                    python-version: '3.x'
+
+            -   name: Install Google Generative AI
+                run: pip install google-generative-ai
+
+            -   name: Ask Gemini
+                id: ask_gemini
+                env:
+                    GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+                    GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+                    COMMENT_BODY: ${{ github.event.comment.body }}
+                run: |
+                    python .github/scripts/gemini_butler.py
