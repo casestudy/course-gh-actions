@@ -30,8 +30,14 @@ def main():
     # 3. Prepare the Prompt
     # Check if the comment starts with /ask or /review
     triggered = raw_comment.strip().startswith('/ask') or raw_comment.strip().startswith('/review')  
+    if raw_comment.strip().startswith('/ask'):
+        triggered = "ask"
+    elif raw_comment.strip().startswith('/review'):
+        triggered = "review"
+    else:
+        triggered = ""
 
-    if triggered == "/ask":
+    if triggered == "ask":
         # Remove the trigger phrase '/ask' to get the actual question
         user_question = raw_comment.replace('/ask', '').strip()
         
@@ -43,7 +49,7 @@ def main():
 
         prompt = f"You are a helpful coding assistant. The user said: {user_question}"
 
-    elif triggered == "/review":
+    elif triggered == "review":
         print(f"Starting Full Code Review for PR #{pr_issue_number}...")
         
         # 1. Fetch the Code Diff
