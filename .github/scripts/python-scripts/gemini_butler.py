@@ -24,7 +24,7 @@ def main():
     try:
         # 4. Generate Content
         # You can add system instructions here if you want it to act like a specific persona
-        response = client.model.generate_content(
+        response = client.models.generate_content(
             model = "gemini-2.5-flash",
             content =   f"You are a helpful coding assistant in a GitHub Pull Request. "
                         f"The user said: {user_question}"
