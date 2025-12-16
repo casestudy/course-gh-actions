@@ -33,4 +33,4 @@ jobs:
                     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
                     COMMENT_BODY: ${{ github.event.comment.body }}
                 run: |
-                    python .github/scripts/gemini_butler.py
+                    python .github/scripts/python-scripts/gemini_butler.py
