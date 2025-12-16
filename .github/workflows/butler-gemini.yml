@@ -24,7 +24,7 @@ jobs:
                     python-version: '3.x'
 
             -   name: Install Google Generative AI
-                run: pip install google-generative-ai
+                run: pip install google-genai
 
             -   name: Ask Gemini
                 id: ask_gemini

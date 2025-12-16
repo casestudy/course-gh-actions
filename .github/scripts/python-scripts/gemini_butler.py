@@ -6,8 +6,6 @@ def main():
     # 1. Setup Configuration
     github_token = os.environ["GITHUB_TOKEN"]
     gemini_key = os.environ["GEMINI_API_KEY"]
-    repo = os.environ["REPO"]
-    comment_id = os.environ["COMMENT_ID"]
     raw_comment = os.environ["COMMENT_BODY"]
     
     # 2. Configure Gemini
