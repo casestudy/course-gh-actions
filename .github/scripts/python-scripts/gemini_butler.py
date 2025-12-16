@@ -1,6 +1,6 @@
 import os
 import requests
-from google.genai import types
+from google import genai
 
 def main():
     # 1. Setup Configuration
@@ -9,8 +9,7 @@ def main():
     raw_comment = os.environ["COMMENT_BODY"]
     
     # 2. Configure Gemini
-    types.configure(api_key=gemini_key)
-    model = types.GenerativeModel('gemini-1.5-flash')
+    client = genai.Client(api_key=gemini_key)
 
     # 3. Prepare the Prompt
     # Remove the trigger phrase '/ask' to get the actual question
@@ -25,9 +24,10 @@ def main():
     try:
         # 4. Generate Content
         # You can add system instructions here if you want it to act like a specific persona
-        response = model.generate_content(
-            f"You are a helpful coding assistant in a GitHub Pull Request. "
-            f"The user said: {user_question}"
+        response = client.model.generate_content(
+            model = "gemini-2.5-flash",
+            content =   f"You are a helpful coding assistant in a GitHub Pull Request. "
+                        f"The user said: {user_question}"
         )
         reply_text = response.text
 
